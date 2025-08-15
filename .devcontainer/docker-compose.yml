@@ -1,0 +1,22 @@
+---
+x-shared: &shared
+  build:
+    context: ..
+    dockerfile: .devcontainer/Dockerfile
+
+services:
+  maitenance_tracker:
+    build: *shared-build
+    volumes:
+      - ..:/app
+      - container_venv_volume:/app/venv
+      - container_logs_volume:/var/log
+    ports:
+      - "8000:8000"
+volumes:
+  container_venv_volume:
+  container_logs_volume:
+
+networks:
+  app_network:
+    driver: bridge
